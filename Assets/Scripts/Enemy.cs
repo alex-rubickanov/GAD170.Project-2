@@ -8,10 +8,16 @@ public class Enemy : MonoBehaviour
     [HideInInspector] Transform target;
     [SerializeField] GameObject enemy;
     [SerializeField] EnemySpawner enemySpawner;
-    
+
+    [HideInInspector] public delegate void OnEnemyDeathEvent();
+    [HideInInspector] public OnEnemyDeathEvent OnEnemyDeath;
+
     private void Start()
     {
         target = GameObject.Find("Player").transform;
+        OnEnemyDeath += KillEnemy;
+        OnEnemyDeath += enemySpawner.RandomInstantiate;
+        
     }
 
     private void Update()
@@ -30,8 +36,16 @@ public class Enemy : MonoBehaviour
     {
         if(other.tag == "Bullet") //checking that object that enemy collides is a Bullet. BulletPrefab has a "Bullet" tag.
         {
-            Destroy(enemy);
-            enemySpawner.RandomInstantiate();     
+            OnEnemyDeath();
+            /* Destroy(enemy);
+            enemySpawner.RandomInstantiate(); */     
         }
     }
+
+    void KillEnemy()
+    {
+        Destroy(enemy);
+    }
+
+    
 }

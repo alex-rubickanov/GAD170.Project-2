@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject[] EnemiesPrefabs;
     [SerializeField] int maxEnemy = 10;
     public int enemyCount = 0;
+
     
 
     private void Start()
