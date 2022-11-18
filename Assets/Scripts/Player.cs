@@ -5,13 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [Header("Movement")] 
     [SerializeField] float speed = 10f;
     CharacterController contoller;
 
+    [Header("Bullets")]
     [SerializeField] GameObject bulletSpawner;
     [SerializeField] GameObject bullet;
 
-    public bool playerAlive = true;
+    [Header("Death Screen")]
+    [SerializeField] GameObject deathText;
+    [SerializeField] GameObject restartText;
+    [HideInInspector] public bool playerAlive = true;
     private void Start()
     {
         contoller = GetComponent<CharacterController>();
@@ -47,7 +52,14 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Player is dead!");
             playerAlive = false;
+            DeathScreen();
         }
         
+    }
+
+    void DeathScreen()
+    {
+        restartText.SetActive(true);
+        deathText.SetActive(true);
     }
 }

@@ -304,3 +304,4 @@ MonoBehaviour:
   speed: 3
   enemy: {fileID: 8724838498234475588}
   enemySpawner: {fileID: 7711355528162673654, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
+  hp: {fileID: 42685367997483696, guid: 73875463e5555c74da6fb6f51607c2d2, type: 3}

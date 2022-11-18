@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [HideInInspector] Transform target;
     [SerializeField] GameObject enemy;
     [SerializeField] EnemySpawner enemySpawner;
+    
     private void Start()
     {
         target = GameObject.Find("Player").transform;
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         ChasePlayer();
+        transform.LookAt(target);
     }
 
     void ChasePlayer() //this function makes enemies follow our player
@@ -29,7 +31,7 @@ public class Enemy : MonoBehaviour
         if(other.tag == "Bullet") //checking that object that enemy collides is a Bullet. BulletPrefab has a "Bullet" tag.
         {
             Destroy(enemy);
-            enemySpawner.RandomInstantiate();
+            enemySpawner.RandomInstantiate();     
         }
     }
 }
