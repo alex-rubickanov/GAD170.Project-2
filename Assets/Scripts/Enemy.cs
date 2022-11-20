@@ -36,9 +36,7 @@ public class Enemy : MonoBehaviour
     {
         if(other.tag == "Bullet") //checking that object that enemy collides is a Bullet. BulletPrefab has a "Bullet" tag.
         {
-            OnEnemyDeath();
-            /* Destroy(enemy);
-            enemySpawner.RandomInstantiate(); */     
+            OnEnemyDeath();   
         }
     }
 
