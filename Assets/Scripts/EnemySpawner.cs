@@ -8,11 +8,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int maxEnemy = 10;
     public int enemyCount = 0;
 
-    
+   
+    public int score;
 
     private void Start()
     {
-        LoopingThroughItems(); 
+        LoopingThroughItems();
     }
 
     private void Update()
@@ -28,12 +29,12 @@ public class EnemySpawner : MonoBehaviour
     {
         float xPos = Random.Range(-49, 49);
         float zPos = Random.Range(-50, 50);
-        Instantiate(EnemiesPrefabs[Random.Range(0, 3)], new Vector3(xPos, 1, zPos), Quaternion.identity);
+        Instantiate(EnemiesPrefabs[Random.Range(0, 2)], new Vector3(xPos, 1, zPos), Quaternion.identity);
     }
 
     private void LoopingThroughItems()                                              // This function takes each prefab in our array and send them in function ItJustWorks to make a string variable to print
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 2; i++)
         {
             Debug.Log(ItJustWorks(EnemiesPrefabs[i],i));
         }                                                                                   // I'm ashamed for these 2 functions. 
@@ -43,5 +44,11 @@ public class EnemySpawner : MonoBehaviour
     {                                                                                 
         string toPrint = "Enemy " + (index+1) + " is " + obj;
         return toPrint;
+    }
+
+    void Score()
+    {
+        score += 1;
+        Debug.Log("Score: " + score);
     }
 }
