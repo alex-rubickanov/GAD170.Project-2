@@ -18,9 +18,15 @@ public class Giant : MonoBehaviour
     private bool isAlive = true;
     private Collider col;
 
+    [Header("AUDIO SFX")]
+    [SerializeField] AudioSource audioSourcce;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] AudioClip dyingSound;
+
     //FIX ROTATION
-    float fixX;
-    float fixZ;
+    private float fixX;
+    private float fixZ;
     private void Start()
     { 
         animator = this.gameObject.GetComponent<Animator>();
@@ -54,6 +60,7 @@ public class Giant : MonoBehaviour
         animator.speed = 1;
         animator.SetBool("Dying", true);
         col.isTrigger = true;
+        audioSourcce.PlayOneShot(dyingSound);
         Destroy(this.gameObject, 10f);
     }
 
@@ -62,10 +69,12 @@ public class Giant : MonoBehaviour
         animator.SetBool("Attack", false);
         animator.SetBool("Walking", true);
         animator.speed = speed;
+        audioSourcce.PlayOneShot(walkSound);
     }
 
     void Attack()
     {
+        audioSourcce.PlayOneShot(attackSound);
         animator.speed = attackSpeed;
         animator.SetBool("Attack", true);
     }

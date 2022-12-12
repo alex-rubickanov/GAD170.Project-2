@@ -13,7 +13,12 @@ public class Zombie : MonoBehaviour
     [SerializeField] float attackSpeed = 1;
     [SerializeField] float hitsToKill = 2;
 
-    
+    [Header("AUDIO SFX")]
+    [SerializeField] AudioSource audioSourcce;
+    [SerializeField] AudioClip walkSound;
+    [SerializeField] AudioClip attackSound;
+    [SerializeField] AudioClip dyingSound;
+
     private Vector3 distanceToPlayer;
     private bool isAlive = true;
     private Collider col;
@@ -54,6 +59,7 @@ public class Zombie : MonoBehaviour
         animator.speed = 1;
         animator.SetBool("Dying", true);
         col.isTrigger = true;
+        audioSourcce.PlayOneShot(dyingSound);
         Destroy(this.gameObject, 10f);
     }
 
@@ -62,12 +68,14 @@ public class Zombie : MonoBehaviour
         animator.SetBool("Attack", false);
         animator.SetBool("Walking",true);
         animator.speed = speed;
+        audioSourcce.PlayOneShot(walkSound);
     }
 
     void Attack()
     {
         animator.speed = attackSpeed;
         animator.SetBool("Attack", true);
+        audioSourcce.PlayOneShot(attackSound);
     }
     
     bool PlayerClose()
