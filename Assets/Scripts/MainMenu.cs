@@ -32,6 +32,6 @@ public class MainMenu : MonoBehaviour
     public void Fade()
     {
         Image imagComp = images[0].GetComponent<Image>();
-        imagComp.
+       
     }
 }
