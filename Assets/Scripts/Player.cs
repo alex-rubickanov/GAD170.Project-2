@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [Header("STATS")]
+    [SerializeField] public int health;
     [Header("Movement")] 
     [SerializeField] float speed = 10f;
     CharacterController contoller;

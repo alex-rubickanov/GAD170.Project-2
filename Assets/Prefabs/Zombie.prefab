@@ -390,14 +390,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdfc884d33a206a40bb5bd380102b636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 7711355528162673654, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
   attackRange: 2
   speed: 1
   attackSpeed: 1
   hitsToKill: 1
   audioSourcce: {fileID: 5453862986030882916}
   walkSound: {fileID: 8300000, guid: db43c3f0d822e6d46932096d081e0ccb, type: 3}
-  attackSound: {fileID: 8300000, guid: 4006503d04616cb4aa3210fa58a9d55e, type: 3}
-  dyingSound: {fileID: 8300000, guid: bcb228d5ada6faf40b67fbc7957b61ea, type: 3}
+  attackSound: {fileID: 8300000, guid: a9052a542492bd6409156c56f8155837, type: 3}
+  dyingSound: {fileID: 8300000, guid: 220c0558f8956554d9cb24b60e13489c, type: 3}
 --- !u!82 &5453862986030882916
 AudioSource:
   m_ObjectHideFlags: 0
@@ -410,7 +411,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.499
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -418,8 +419,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0.3
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -454,7 +455,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

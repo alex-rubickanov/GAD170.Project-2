@@ -6,6 +6,8 @@ public class Zombie : MonoBehaviour
 {
     private Animator animator;
     private GameObject player;
+    public EnemySpawner enemySpawner;
+    bool onetime = true;
 
     [Header("STATS")]
     [SerializeField] float attackRange;
@@ -15,7 +17,7 @@ public class Zombie : MonoBehaviour
 
     [Header("AUDIO SFX")]
     [SerializeField] AudioSource audioSourcce;
-    [SerializeField] AudioClip walkSound;
+    //[SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip dyingSound;
 
@@ -48,7 +50,12 @@ public class Zombie : MonoBehaviour
         }
         else
         {
-            Death();
+            if (onetime)
+            {
+                Death();
+                onetime = false;
+            }
+            
         }
         
     }
@@ -61,6 +68,9 @@ public class Zombie : MonoBehaviour
         col.isTrigger = true;
         audioSourcce.PlayOneShot(dyingSound);
         Destroy(this.gameObject, 10f);
+        enemySpawner.RandomInstantiate();
+        enemySpawner.Score(1);
+        Debug.Log("Score: " + enemySpawner.score);
     }
 
     void Chasing()
@@ -68,7 +78,7 @@ public class Zombie : MonoBehaviour
         animator.SetBool("Attack", false);
         animator.SetBool("Walking",true);
         animator.speed = speed;
-        audioSourcce.PlayOneShot(walkSound);
+       // audioSourcce.PlayOneShot(walkSound);
     }
 
     void Attack()
@@ -109,7 +119,7 @@ public class Zombie : MonoBehaviour
                 isAlive = false;
             } else
             {
-                hitsToKill = -1;
+                hitsToKill -= 1;
             }
         }
     }

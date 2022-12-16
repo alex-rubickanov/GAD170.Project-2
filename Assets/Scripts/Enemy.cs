@@ -7,16 +7,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed = 30f;
     [HideInInspector] Transform target;
     [SerializeField] GameObject enemy;
-    [SerializeField] EnemySpawner enemySpawner;
+    [SerializeField] public EnemySpawner enemySpawner;
 
-    [HideInInspector] public delegate void OnEnemyDeathEvent();
-    [HideInInspector] public OnEnemyDeathEvent OnEnemyDeath;
+    
 
     private void Start()
     {
         target = GameObject.Find("Player").transform;
-        OnEnemyDeath += KillEnemy;
-        OnEnemyDeath += enemySpawner.RandomInstantiate;
         
     }
 
@@ -32,18 +29,10 @@ public class Enemy : MonoBehaviour
         transform.position += destination * speed * Time.deltaTime; //moves enemy
     }
 
-    private void OnTriggerEnter(Collider other) //if bullet and enemies collides we destroy enemy
-    {
-        if(other.tag == "Bullet") //checking that object that enemy collides is a Bullet. BulletPrefab has a "Bullet" tag.
-        {
-            OnEnemyDeath();   
-        }
-    }
-
-    void KillEnemy()
+   /* void KillEnemy()
     {
         Destroy(enemy);
-    }
+    } */
 
     
 }

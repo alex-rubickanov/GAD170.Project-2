@@ -6,6 +6,8 @@ public class Giant : MonoBehaviour
 {
     private Animator animator;
     private GameObject player;
+    public EnemySpawner enemySpawner;
+    bool onetime = true;
 
     [Header("STATS")]
     [SerializeField] float attackRange;
@@ -20,7 +22,7 @@ public class Giant : MonoBehaviour
 
     [Header("AUDIO SFX")]
     [SerializeField] AudioSource audioSourcce;
-    [SerializeField] AudioClip walkSound;
+    //[SerializeField] AudioClip walkSound;
     [SerializeField] AudioClip attackSound;
     [SerializeField] AudioClip dyingSound;
 
@@ -49,7 +51,12 @@ public class Giant : MonoBehaviour
         }
         else
         {
-            Death();
+            if (onetime)
+            {
+                Death();
+                onetime = false;
+            }
+            
         }
 
     }
@@ -62,6 +69,9 @@ public class Giant : MonoBehaviour
         col.isTrigger = true;
         audioSourcce.PlayOneShot(dyingSound);
         Destroy(this.gameObject, 10f);
+        enemySpawner.RandomInstantiate();
+        enemySpawner.Score(3);
+        Debug.Log("Score: " + enemySpawner.score);
     }
 
     void Chasing()
@@ -69,7 +79,7 @@ public class Giant : MonoBehaviour
         animator.SetBool("Attack", false);
         animator.SetBool("Walking", true);
         animator.speed = speed;
-        audioSourcce.PlayOneShot(walkSound);
+        //audioSourcce.PlayOneShot(walkSound);
     }
 
     void Attack()
@@ -111,7 +121,7 @@ public class Giant : MonoBehaviour
             }
             else
             {
-                hitsToKill = -1;
+                hitsToKill -= 1;
             }
         }
     }

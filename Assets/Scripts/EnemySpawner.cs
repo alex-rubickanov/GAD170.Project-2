@@ -6,23 +6,22 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] GameObject[] EnemiesPrefabs;
     [SerializeField] int maxEnemy = 10;
-    public int enemyCount = 0;
+    private int enemyCount = 0;
+    [HideInInspector] public int score { get; private set; } = 0;
 
-   
-    public int score;
-
-    private void Start()
+    public void Start()
     {
         LoopingThroughItems();
     }
 
     private void Update()
     {
-        while (enemyCount < maxEnemy) //while we have 10 enemies we dont instantiate more enemies
+        if (enemyCount < maxEnemy) // we have 10 enemies we dont instantiate more enemies
         {
             RandomInstantiate();
             enemyCount += 1;
         }
+        
     }
 
     public void RandomInstantiate() //this function spawn random enemy prefab from array on random position on the map
@@ -46,9 +45,9 @@ public class EnemySpawner : MonoBehaviour
         return toPrint;
     }
 
-    void Score()
+    public int Score(int points)
     {
-        score += 1;
-        Debug.Log("Score: " + score);
+        score += points;
+        return score;
     }
 }

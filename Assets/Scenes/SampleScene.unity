@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3f616cb3e841c843a12093f5e6aa4c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 0
   speed: 4
   bulletSpawner: {fileID: 669881437}
   bullet: {fileID: 6740165250385517488, guid: d35b66de14942694893d1cfc55d63e04, type: 3}
@@ -1315,29 +1316,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7711355528162673654, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
-      propertyPath: EnemiesPrefabs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711355528162673654, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
-      propertyPath: EnemiesPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 2086672883110657673, guid: a5f6d43b8a019304ab536a987e5cef46, type: 3}
-    - target: {fileID: 7711355528162673654, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
-      propertyPath: EnemiesPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 8428591677134337848, guid: 82b86ee955a3af94e816701fa67723f2, type: 3}
     - target: {fileID: 7711355528162673655, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711355528162673655, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7711355528162673655, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
-      propertyPath: m_TagString
-      value: Enemy Spawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd6875252fd02f84d86ae3ff21a030de, type: 3}
