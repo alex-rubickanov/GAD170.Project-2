@@ -7,17 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    GameObject[] images;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void StartButton()
     {
@@ -29,9 +18,5 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void Fade()
-    {
-        Image imagComp = images[0].GetComponent<Image>();
-       
-    }
+    
 }

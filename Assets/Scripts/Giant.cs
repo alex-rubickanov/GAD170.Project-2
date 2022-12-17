@@ -37,7 +37,7 @@ public class Giant : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         col = this.gameObject.GetComponent<Collider>();
         enemySpawner = FindObjectOfType<EnemySpawner>();
-        playerScript = FindObjectOfType<Player>();
+        playerScript = FindObjectOfType<Player>();                              //EVERYTHING THE SAME AS IN ZOMBIE SCRIPT
     }
 
     private void Update()
@@ -99,6 +99,7 @@ public class Giant : MonoBehaviour
         animator.speed = attackSpeed;
         animator.SetBool("Attack", true);
         playerScript.health -= 20;
+        Debug.Log(playerScript.health);
     }
 
     bool PlayerClose()

@@ -8,6 +8,7 @@ public class Zombie : MonoBehaviour
     private GameObject player;
     EnemySpawner enemySpawner;
     bool onetime = true;
+    bool onetime2 = true;
     Player playerScript;
 
     [Header("STATS")]
@@ -48,21 +49,30 @@ public class Zombie : MonoBehaviour
             FixPosition();
             if (PlayerClose())
             {
-                Attack();
+                if (onetime2)                               // i hope there will be better option that make a ONETIME bool variable but i got so many problems as memory leak without it
+                {
+                    Attack();
+                    onetime2 = false;
+                }
+
             }
-            else Chasing();
+            else
+            {
+                Chasing();
+                onetime2 = true;
+            }
         }
         else
         {
             if (onetime)
             {
                 Death();
-                enemySpawner.OnEnemyDeath(1);
+                enemySpawner.OnEnemyDeath(3);
                 onetime = false;
             }
-            
+
         }
-        
+
     }
 
 
@@ -70,7 +80,7 @@ public class Zombie : MonoBehaviour
     {
         animator.speed = 1;
         animator.SetBool("Dying", true);
-        col.isTrigger = true;
+        col.isTrigger = true;                           //play animation, sound, make trigger collider to be able go through and destroy in 10 seconds
         audioSourcce.PlayOneShot(dyingSound);
         Destroy(this.gameObject, 10f);
     }
@@ -85,13 +95,14 @@ public class Zombie : MonoBehaviour
 
     void Attack()
     {
-        animator.speed = attackSpeed;
+        animator.speed = attackSpeed;       // we play animation, play attack sound, decrease player's health
         animator.SetBool("Attack", true);
         audioSourcce.PlayOneShot(attackSound);
         playerScript.health -= 15;
+        Debug.Log(playerScript.health);
     }
     
-    bool PlayerClose()
+    bool PlayerClose() //check player
     {
         distanceToPlayer = this.transform.position - player.transform.position;
         if (distanceToPlayer.magnitude < attackRange)
@@ -101,7 +112,7 @@ public class Zombie : MonoBehaviour
         else return false;
     }
 
-    void FixPosition()
+    void FixPosition() //fix model's poistion. Try to comment this function in update to see what could be without it
     {
         this.transform.position = new Vector3(this.transform.position.x, 0, this.transform.position.z);
         
@@ -113,7 +124,7 @@ public class Zombie : MonoBehaviour
         transform.rotation = Quaternion.Euler(fixX, this.transform.rotation.eulerAngles.y, fixZ);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) // if object collides with bullet HITSTOKILL times it dies
     {
         if (other.tag == "Bullet")
         {

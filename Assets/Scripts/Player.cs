@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
             Movement();
         } else
         {
-            Debug.Log(health);
             Debug.Log("Played is dead!");
             DeathScreen();
         }
