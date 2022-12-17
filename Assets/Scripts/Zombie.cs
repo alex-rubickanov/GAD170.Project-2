@@ -6,8 +6,9 @@ public class Zombie : MonoBehaviour
 {
     private Animator animator;
     private GameObject player;
-    public EnemySpawner enemySpawner;
+    EnemySpawner enemySpawner;
     bool onetime = true;
+    Player playerScript;
 
     [Header("STATS")]
     [SerializeField] float attackRange;
@@ -33,6 +34,9 @@ public class Zombie : MonoBehaviour
         animator = this.gameObject.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         col = this.gameObject.GetComponent<Collider>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
+        playerScript = FindObjectOfType<Player>();
+
     }
 
     private void Update()
@@ -53,6 +57,7 @@ public class Zombie : MonoBehaviour
             if (onetime)
             {
                 Death();
+                enemySpawner.OnEnemyDeath(1);
                 onetime = false;
             }
             
@@ -61,16 +66,13 @@ public class Zombie : MonoBehaviour
     }
 
 
-    public void Death()
+    void Death()
     {
         animator.speed = 1;
         animator.SetBool("Dying", true);
         col.isTrigger = true;
         audioSourcce.PlayOneShot(dyingSound);
         Destroy(this.gameObject, 10f);
-        enemySpawner.RandomInstantiate();
-        enemySpawner.Score(1);
-        Debug.Log("Score: " + enemySpawner.score);
     }
 
     void Chasing()
@@ -86,6 +88,7 @@ public class Zombie : MonoBehaviour
         animator.speed = attackSpeed;
         animator.SetBool("Attack", true);
         audioSourcce.PlayOneShot(attackSound);
+        playerScript.health -= 15;
     }
     
     bool PlayerClose()

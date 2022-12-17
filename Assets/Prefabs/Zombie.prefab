@@ -396,9 +396,9 @@ MonoBehaviour:
   attackSpeed: 1
   hitsToKill: 1
   audioSourcce: {fileID: 5453862986030882916}
-  walkSound: {fileID: 8300000, guid: db43c3f0d822e6d46932096d081e0ccb, type: 3}
   attackSound: {fileID: 8300000, guid: a9052a542492bd6409156c56f8155837, type: 3}
   dyingSound: {fileID: 8300000, guid: 220c0558f8956554d9cb24b60e13489c, type: 3}
+  body: {fileID: 2086672883110657673}
 --- !u!82 &5453862986030882916
 AudioSource:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.499
+  m_Volume: 0.586
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -419,8 +419,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.3
-  MaxDistance: 10
+  MinDistance: 0.2
+  MaxDistance: 15
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

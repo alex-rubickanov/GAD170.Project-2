@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,24 +8,32 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject[] EnemiesPrefabs;
     [SerializeField] int maxEnemy = 10;
     private int enemyCount = 0;
-    [HideInInspector] public int score { get; private set; } = 0;
+    public int score;
 
-    public void Start()
+    public delegate void OnEnemyDeathEvent(int integer);
+    public OnEnemyDeathEvent OnEnemyDeath;
+
+    void Start()
     {
+        score = 0;
+        print("??");
         LoopingThroughItems();
+        OnEnemyDeath += RandomInstantiate;
+        OnEnemyDeath += Score;
+
     }
 
-    private void Update()
+    void Update()
     {
         if (enemyCount < maxEnemy) // we have 10 enemies we dont instantiate more enemies
         {
-            RandomInstantiate();
+            RandomInstantiate(0);
             enemyCount += 1;
         }
         
     }
 
-    public void RandomInstantiate() //this function spawn random enemy prefab from array on random position on the map
+    public void RandomInstantiate(int integer) //this function spawn random enemy prefab from array on random position on the map
     {
         float xPos = Random.Range(-49, 49);
         float zPos = Random.Range(-50, 50);
@@ -45,9 +54,9 @@ public class EnemySpawner : MonoBehaviour
         return toPrint;
     }
 
-    public int Score(int points)
+    public void Score(int points)
     {
         score += points;
-        return score;
+        Debug.Log("Score: " + score);
     }
 }

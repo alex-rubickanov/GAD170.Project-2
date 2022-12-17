@@ -6,8 +6,10 @@ public class Giant : MonoBehaviour
 {
     private Animator animator;
     private GameObject player;
-    public EnemySpawner enemySpawner;
+    EnemySpawner enemySpawner;
     bool onetime = true;
+    bool onetime2 = true;
+    Player playerScript;
 
     [Header("STATS")]
     [SerializeField] float attackRange;
@@ -34,6 +36,8 @@ public class Giant : MonoBehaviour
         animator = this.gameObject.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         col = this.gameObject.GetComponent<Collider>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
+        playerScript = FindObjectOfType<Player>();
     }
 
     private void Update()
@@ -45,15 +49,25 @@ public class Giant : MonoBehaviour
             FixPosition();
             if (PlayerClose())
             {
-                Attack();
+                if (onetime2)
+                {
+                    Attack();
+                    onetime2 = false;
+                }
+
             }
-            else Chasing();
+            else
+            {
+                Chasing();
+                onetime2 = true;
+            }
         }
         else
         {
             if (onetime)
             {
                 Death();
+                enemySpawner.OnEnemyDeath(3);
                 onetime = false;
             }
             
@@ -62,16 +76,13 @@ public class Giant : MonoBehaviour
     }
 
 
-    public void Death()
+    void Death()
     {
         animator.speed = 1;
         animator.SetBool("Dying", true);
         col.isTrigger = true;
         audioSourcce.PlayOneShot(dyingSound);
         Destroy(this.gameObject, 10f);
-        enemySpawner.RandomInstantiate();
-        enemySpawner.Score(3);
-        Debug.Log("Score: " + enemySpawner.score);
     }
 
     void Chasing()
@@ -87,6 +98,7 @@ public class Giant : MonoBehaviour
         audioSourcce.PlayOneShot(attackSound);
         animator.speed = attackSpeed;
         animator.SetBool("Attack", true);
+        playerScript.health -= 20;
     }
 
     bool PlayerClose()

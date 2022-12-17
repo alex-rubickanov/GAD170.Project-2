@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [Header("STATS")]
-    [SerializeField] public int health;
+    public int health = 100;
+
     [Header("Movement")] 
     [SerializeField] float speed = 10f;
     CharacterController contoller;
@@ -26,9 +27,14 @@ public class Player : MonoBehaviour
     }
     private void Update()
     { 
-        if(playerAlive == true) //let player move while he is alive, when we put FALSE in variable playerAlive we "freeze" him
+        if (health > 0) //let player move while he is alive, when we put FALSE in variable playerAlive we "freeze" him
         {
             Movement();
+        } else
+        {
+            Debug.Log(health);
+            Debug.Log("Played is dead!");
+            DeathScreen();
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) //lets player restart the game
@@ -46,17 +52,6 @@ public class Player : MonoBehaviour
         Vector3 move = transform.right * x + transform.forward * z;
 
         contoller.Move(move * speed * Time.deltaTime);
-    }
-
-    private void OnTriggerEnter(Collider other) //if player collides with enemy we put FALSE in boolean variable playerAlive
-    {
-        if (other.tag == "Enemy") //all enemies prefabs have tag ENEMY
-        {
-            Debug.Log("Player is dead!");
-            playerAlive = false;
-            DeathScreen();
-        }
-        
     }
 
     void DeathScreen()

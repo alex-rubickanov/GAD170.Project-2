@@ -17,7 +17,7 @@ public class MouseLook : MonoBehaviour                          // This code is 
     
     void Update()
     {
-        if (playerScript.playerAlive == true) 
+        if (playerScript.health > 0) 
         {
             mouseX = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
             mouseY = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
